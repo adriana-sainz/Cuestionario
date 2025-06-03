@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cuál es tu lugar en RITSI? - Descubre tu comisión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-ritsi: #da2724;
+            --color-ritsi-dark: #a51d1b;
+            --color-bg: #f5f5f5;
+            --color-text: #333;
+            --color-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e6e6e6 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--color-light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 2px solid var(--color-ritsi);
+        }
+        
+        header {
+            background-color: var(--color-ritsi);
+            color: var(--color-light);
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        section {
+            padding: 30px;
+        }
+        
+        .section-title {
+            color: var(--color-ritsi);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--color-ritsi);
+            border-radius: 3px;
+        }
+        
+        .intro {
+            background-color: rgba(218, 39, 36, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(218, 39, 36, 0.1);
+        }
+        
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .intro .highlight {
+            color: var(--color-ritsi);
+            font-weight: 600;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+            background-color: var(--color-light);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--color-ritsi);
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px;
+            border: 2px solid rgba(218, 39, 36, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option:hover {
+            border-color: var(--color-ritsi);
+            background-color: rgba(218, 39, 36, 0.03);
+        }
+        
+        .option.selected {
+            border-color: var(--color-ritsi);
+            background-color: rgba(218, 39, 36, 0.05);
+            position: relative;
+        }
+        
+        .option.selected::after {
+            content: "✓";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--color-ritsi);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            margin-right: 5px;
+            color: var(--color-ritsi);
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background-color: var(--color-ritsi);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Exo', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(218, 39, 36, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--color-ritsi-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(218, 39, 36, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .result-section {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(218,39,36,0.05) 0%, rgba(218,39,36,0.01) 100%);
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed var(--color-ritsi);
+        }
+        
+        .commission-title {
+            font-size: 2rem;
+            color: var(--color-ritsi);
+            margin: 20px 0;
+            font-weight: 700;
+        }
+        
+        .commission-icon {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+        
+        .commission-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        .restart-btn {
+            background-color: transparent;
+            color: var(--color-ritsi);
+            border: 2px solid var(--color-ritsi);
+            padding: 10px 25px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .restart-btn:hover {
+            background-color: var(--color-ritsi);
+            color: white;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: rgba(218, 39, 36, 0.1);
+            border-radius: 10px;
+            margin: 20px 0 30px;
+            overflow: hidden;
+            height: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-ritsi);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .ritsi-logo {
+            font-weight: 700;
+            color: var(--color-ritsi);
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>¿Cuál es tu lugar en RITSI?</h1>
+            <p class="subtitle">¡Descubre a qué comisión realmente perteneces!</p>
+        </header>
+        
+        <section id="intro">
+            <div class="intro">
+                <p>¡Bienvenido/a a tu destino RITSIniano!</p>
+                <p>En esta divertida prueba, averiguarás cuál es la comisión que más encaja contigo.</p>
+                <p class="highlight">No es un test de BuzzFeed, ¡pero casi!</p>
+                <p>Responde sinceramente… Sé tú mismo/a… y no hagas trampas.</p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </section>
+        
+        <form id="quizForm">
+            <section id="questions">
+                <!-- Las preguntas se generarán dinámicamente con JavaScript -->
+            </section>
+            
+            <div class="btn-container">
+                <button type="button" id="submitBtn" class="btn">Descubre tu comisión</button>
+            </div>
+        </form>
+        
+        <section id="result" class="result-section">
+            <!-- Resultado se mostrará aquí -->
+        </section>
+        
+        <footer>
+            <p>Cuestionario desarrollado para <span class="ritsi-logo">RITSI</span> - Reunión de Estudiantes de Ingenierías Técnicas y Superiores en Informática</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Datos del cuestionario
+            const questions = [
+                {
+                    question: "1. Si fueras parte de una banda musical, ¿qué rol te gustaría tener?",
+                    options: [
+                        "A. Diseñar la estética, llevar el insta y el tiktok.",
+                        "B. Montar cables / ser técnico de sonido.",
+                        "C. Organzar el tour (a qué lugares iréis, dónde dormiréis...).",
+                        "D. Escribir letras profundas con impacto social.",
+                        "E. Revisar los contrato con lupa.",
+                        "F. Llevar el twitter de la banda.",
+                        "G. Presentar las canciones o entretener al grupo.",
+                        "H. Organizar las reuniones de la banda y las estrategias comerciales.",
+                        "I. Corregir los informes antes de enviarlos."
+                    ]
+                },
+                {
+                    question: "2. ¿Qué harías un domingo por la tarde?",
+                    options: [
+                        "A. Dibujar o alguna manualidad.",
+                        "B. Programar algo por diversión.",
+                        "C. Organizar una quedada con amigos.",
+                        "D. Leer un libro tranquilamente.",
+                        "E. Aprovechar para planificar la semana.",
+                        "F. Ver tertulias o noticias",
+                        "G. Alguna actividad deportiva",
+                        "H. Reflexionar sobre la levedad del ser",
+                        "I. Opinar de redflags de gente que conocéis con vuestros amigos"
+                    ]
+                },
+                {
+                    question: "3. ¿Qué papel sueles tomar en los trabajos en grupo?",
+                    options: [
+                        "A. Diseño y presentación visual",
+                        "B. Encargado/a del software o herramientas",
+                        "C. Coordinación y planificación",
+                        "D. Investigación y marco teórico",
+                        "E. Plantear la estructura y el formato",
+                        "F. Preparar la presentación oral",
+                        "G. Animar y mantener la moral alta",
+                        "H. El solucionador de conflictos",
+                        "I. El que revisa y corrige errores"
+                    ]
+                },
+                {
+                    question: "4. ¿Cuál de estas tareas te resulta más atractiva?",
+                    options: [
+                        "A. Crear carteles, vídeos o plantillas",
+                        "B. Administrar servidores o plataformas",
+                        "C. Coordinar eventos o actividades externas",
+                        "D. Investigar la situación académica de la informática",
+                        "E. Redactar o actualizar normativas",
+                        "F. Crear campañas informativas para redes.",
+                        "G. Organizar juegos o dinámicas internas",
+                        "H. Me creo especial y capaz de todo eso y más",
+                        "I. Medir y mejorar procesos de trabajo"
+                    ]
+                },
+                {
+                    question: "5. ¿Si fueras un software serías?",
+                    options: [
+                        "A. Canva / Instagram ",
+                        "B. GitHub / VSCode",
+                        "C. Google Calendar / Trello",
+                        "D. Ninguno, prefiero el papel y el boli",
+                        "E. Google Docs (modo sugerencias)",
+                        "F. X (Twitter)",
+                        "G. Kahoot! / Discord",
+                        "H. Notion / Slack",
+                        "I. Google Forms"
+                    ]
+                },
+                {
+                    question: "6. Nos obligas a volver de una fiesta demasiado pronto, sería porque",
+                    options: [
+                        "A. El sitio es más feo que pegar a un padre",
+                        "B. La máquina de humo no funciona y los altavoces son de calidad dudosa (en el fondo crees que tú lo harías mejor)",
+                        "C. El evento está mal organizado y se han quedado sin alcohol (¿cómo puedes ser?)",
+                        "D. Las canciones no resuenan con tus valores morales y éticos",
+                        "E. Han dejado entrar a niños de 12 años que claramente no saben quién es Sportacus",
+                        "F. No querías ir desde el principio porque la descripción de la fiesta era bastante deprimente",
+                        "G. Faltaba ambiente, la gente no lo estaba dando todo, tus amigos no bailan ni la gasolina",
+                        "H. Un amigo se ha puesto mal y querías llevarlo a casa",
+                        "I. El baño estaba tan sucio que te has negado a entrar"
+                    ]
+                },
+                {
+                    question: "7. ¿Qué tipo de contenido consumirías más en redes?",
+                    options: [
+                        "A. Get ready with me ",
+                        "B. Clips de F1 ",
+                        "C. Vlogs",
+                        "D. Reviews de libros o pelis",
+                        "E. Debates de conservadores vs liberales",
+                        "F. Resúmenes de noticias",
+                        "G. Gameplays",
+                        "H. Veo de todo, desde vídeos de psicología hasta un tutorial patra hacer un cóctel molotov",
+                        "I. Lo que compré vs lo que me llegó"
+                    ]
+                },
+                {
+                    question: "8. ¿Cómo te describirían tus amistades?",
+                    options: [
+                        "A. Creativo/a y expresivo/a.",
+                        "B. Técnico/a y resolutivo/a.",
+                        "C. Organizado/a y directo/a.",
+                        "D. Crítico/a y curioso/a.",
+                        "E. Detallista y legalista.",
+                        "F. Comunicativo/a y carismático/a.",
+                        "G. Alegre y sociable.",
+                        "H. Empático/a y conciliador/a.",
+                        "I. Metódico/a y estructurado/a."
+                    ]
+                },
+                {
+                    question: "9. ¿Qué frase podría ser tu eslogan?",
+                    options: [
+                        "A. 'La estética también comunica.'",
+                        "B. 'Si no funciona, lo arreglo.'",
+                        "C. 'Lo importante es planificar bien.'",
+                        "D. 'Conocer es poder.'",
+                        "E. 'Todo por las normas claras.'",
+                        "F. 'A buen entendedor, pocas palabras.'",
+                        "G. 'Me voy a relejar 5 minutitos que así no se puede trabajar.'",
+                        "H. '¿Cómo podemos mejorar esto?'",
+                        "I. '¿Lo quieres en una palabra o en dos?, en una mierda, en dos puta mierda'"
+                    ]
+                },
+                {
+                    question: "10. ¿Con cuál de estas afirmaciones conectas más?",
+                    options: [
+                        "A. Me encanta dar identidad visual a todo.",
+                        "B. Me gusta tener control técnico de sistemas.",
+                        "C. Me encanta coordinar cosas grandes.",
+                        "D. Disfruto entender el contexto académico.",
+                        "E. Me gusta redactar y revisar reglamentos.",
+                        "F. Amo planificar cómo comunicar ideas.",
+                        "G. Quiero crear comunidad y risas.",
+                        "H. Me preocupan las personas y los equipos.",
+                        "I. Siempre reviso lo que se puede optimizar."
+                    ]
+                }
+            ];
+            
+            // Mapeo de comisiones
+            const commissions = {
+                'A': {
+                    name: 'Comisión de Creación y Diseño de Contenido',
+                    emoji: '🎨',
+                    description: 'Eres la persona creativa que da vida visual a las ideas. Tu talento transforma conceptos abstractos en diseños impactantes que comunican y emocionan. ¡Tus habilidades son esenciales para crear la identidad visual de RITSI!'
+                },
+                'B': {
+                    name: 'Comisión de Infraestructuras y Comunicaciones',
+                    emoji: '⚙️',
+                    description: 'Eres el/la experto/a técnico que mantiene todo funcionando. Desde servidores hasta redes, aseguras que la tecnología esté siempre operativa y segura. ¡Sin ti, nada funcionaría!'
+                },
+                'C': {
+                    name: 'Comisión de Gestión y Organización de Eventos Externos',
+                    emoji: '🗂️',
+                    description: 'Eres el/la maestro/a de la logística que hace que los eventos sucedan. Coordinas espacios, proveedores y detalles para crear experiencias memorables. ¡Tus habilidades organizativas son invaluables!'
+                },
+                'D': {
+                    name: 'Comisión de Estudios y Profesión',
+                    emoji: '📚',
+                    description: 'Eres el/la investigador/a curioso/a que profundiza en el conocimiento. Analizas tendencias, estudias el contexto académico y compartes información valiosa. ¡Tu mente analítica es un tesoro!'
+                },
+                'E': {
+                    name: 'Comisión de Normativa',
+                    emoji: '📜',
+                    description: 'Eres el/la guardián de las reglas que asegura que todo funcione correctamente. Revisas documentos, velas por el cumplimiento normativo y mantienes la estructura organizativa. ¡Tu atención al detalle es fundamental!'
+                },
+                'F': {
+                    name: 'Comisión de Comunicación Institucional',
+                    emoji: '📢',
+                    description: 'Eres la voz de RITSI que conecta con el mundo exterior. Creas mensajes efectivos, gestionas redes sociales y construyes la imagen pública. ¡Tu talento comunicativo es esencial!'
+                },
+                'G': {
+                    name: 'Comisión de Actividades',
+                    emoji: '🎉',
+                    description: 'Eres el alma de la fiesta que crea ambiente y comunidad. Organizas juegos, dinámicas y eventos que unen a las personas. ¡Tu energía y creatividad son contagiosas!'
+                },
+                'H': {
+                    name: 'Comisión de Organización Interna',
+                    emoji: '🧩',
+                    description: 'Eres el/la facilitador/a que asegura que todo el equipo funcione en armonía. Detectas necesidades, integras a nuevos miembros y mejoras los procesos internos. ¡Tu empatía es el pegamento del equipo!'
+                },
+                'I': {
+                    name: 'Comisión de Calidad y Apoyo',
+                    emoji: '✅',
+                    description: 'Eres el/la perfeccionista que optimiza cada proceso. Analizas resultados, propones mejoras y aseguras que todo cumpla con los más altos estándares. ¡Tu enfoque metódico es invaluable!'
+                }
+            };
+            
+            const questionsContainer = document.getElementById('questions');
+            const quizForm = document.getElementById('quizForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const resultSection = document.getElementById('result');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Generar preguntas
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                
+                const questionTitle = document.createElement('div');
+                questionTitle.className = 'question';
+                questionTitle.textContent = q.question;
+                questionDiv.appendChild(questionTitle);
+                
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options';
+                
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('label');
+                    optionDiv.className = 'option';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `q${index + 1}`;
+                    input.value = option.charAt(0); // A, B, C, etc.
+                    
+                    optionDiv.appendChild(input);
+                    
+                    const optionText = document.createElement('span');
+                    optionText.innerHTML = `<span class="option-label">${option.charAt(0)}</span>${option.substring(2)}`;
+                    optionDiv.appendChild(optionText);
+                    
+                    // Agregar evento para seleccionar la opción
+                    optionDiv.addEventListener('click', function() {
+                        // Deseleccionar otras opciones en la misma pregunta
+                        const siblings = optionsContainer.querySelectorAll('.option');
+                        siblings.forEach(sib => sib.classList.remove('selected'));
+                        
+                        // Seleccionar esta opción
+                        optionDiv.classList.add('selected');
+                        input.checked = true;
+                        
+                        // Actualizar barra de progreso
+                        updateProgress();
+                    });
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
+                
+                questionDiv.appendChild(optionsContainer);
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            // Actualizar barra de progreso
+            function updateProgress() {
+                const totalQuestions = questions.length;
+                let answered = 0;
+                
+                for (let i = 1; i <= totalQuestions; i++) {
+                    if (document.querySelector(`input[name="q${i}"]:checked`)) {
+                        answered++;
+                    }
+                }
+                
+                const percentage = (answered / totalQuestions) * 100;
+                progressBar.style.width = `${percentage}%`;
+            }
+            
+            // Manejar envío del formulario
+            submitBtn.addEventListener('click', function() {
+                const answers = {};
+                let allAnswered = true;
+                
+                // Recopilar respuestas
+                for (let i = 1; i <= questions.length; i++) {
+                    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                    
+                    if (selectedOption) {
+                        answers[`q${i}`] = selectedOption.value;
+                    } else {
+                        allAnswered = false;
+                        break;
+                    }
+                }
+                
+                if (!allAnswered) {
+                    alert('Por favor, responde todas las preguntas antes de continuar.');
+                    return;
+                }
+                
+                // Contar frecuencia de cada opción
+                const frequency = {};
+                Object.values(answers).forEach(answer => {
+                    frequency[answer] = (frequency[answer] || 0) + 1;
+                });
+                
+                // Encontrar la opción más frecuente
+                let maxCommission = '';
+                let maxCount = 0;
+                
+                for (const [commission, count] of Object.entries(frequency)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        maxCommission = commission;
+                    }
+                }
+                
+                // Mostrar resultado
+                showResult(maxCommission);
+            });
+            
+            // Mostrar resultado
+            function showResult(commissionKey) {
+                const commission = commissions[commissionKey];
+                
+                resultSection.innerHTML = `
+                    <h2>¡Tu lugar en RITSI está aquí!</h2>
+                    <div class="commission-icon">${commission.emoji}</div>
+                    <div class="commission-title">${commission.name} ${commission.emoji}</div>
+                    <p class="commission-description">${commission.description}</p>
+                    <button class="btn restart-btn" id="restartBtn">Hacer el test de nuevo</button>
+                `;
+                
+                resultSection.style.display = 'block';
+                
+                // Desplazarse al resultado
+                resultSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Manejar botón de reinicio
+                document.getElementById('restartBtn').addEventListener('click', function() {
+                    quizForm.reset();
+                    resultSection.style.display = 'none';
+                    
+                    // Deseleccionar todas las opciones visualmente
+                    document.querySelectorAll('.option').forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    
+                    // Reiniciar barra de progreso
+                    progressBar.style.width = '0%';
+                    
+                    // Desplazarse al inicio
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
