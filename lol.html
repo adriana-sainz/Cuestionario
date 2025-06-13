@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario Incidencias CEEINA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Fondo general y tipografía */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #FFF9E5; /* Amarillo muy suave */
+      color: #223D71;
+      padding: 2rem;
+      max-width: 850px;
+      margin: auto;
+      box-sizing: border-box;
+    }
+    /* Cabecera */
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      background-color: #EDAC0F; /* Amarillo fuerte */
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    }
+    /* Introducción */
+    p.intro {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      color: #333;
+      background: #fff;
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-left: 6px solid #EDAC0F;
+    }
+    a.email-link {
+      color: #223D71;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    a.email-link:hover {
+      border-color: #223D71;
+    }
+    /* Formulario */
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      box-sizing: border-box;
+    }
+    label {
+      font-weight: 700;
+      margin-top: 1.2rem;
+      display: block;
+      color: #223D71;
+      font-size: 1rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      margin: 0.4rem 0 1.2rem;
+      border-radius: 6px;
+      border: 1.8px solid #ccc;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #EDAC0F;
+      outline: none;
+      box-shadow: 0 0 6px #EDAC0F88;
+    }
+    textarea {
+      min-height: 5rem;
+      resize: vertical;
+    }
+    /* Asignaturas */
+    .asignatura {
+      background: #FFF8DC; /* amarillo muy pálido */
+      border-left: 6px solid #EDAC0F;
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      box-shadow: inset 0 0 6px #EDAC0F44;
+    }
+    .asignatura strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #C48C00;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-shadow: 1px 1px 2px #FFE680;
+    }
+    /* Otros */
+    .otros-block {
+      background: #FFFCF2;
+      border-left: 6px solid #EDAC0F;
+      padding: 1rem 1.3rem;
+      border-radius: 8px;
+      margin-top: 1.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #223D71;
+      box-shadow: inset 0 0 6px #EDAC0F44;
+    }
+    .otros-block textarea {
+      margin-top: 0.5rem;
+      font-weight: normal;
+      color: #555;
+    }
+    /* Botón */
+    button {
+      background-color: #223D71;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 2rem;
+      box-shadow: 0 6px 12px rgba(34,61,113,0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    button:hover {
+      background-color: #1b2d5a;
+      box-shadow: 0 8px 16px rgba(27,45,90,0.7);
+    }
+    button:focus {
+      outline: 3px solid #EDAC0F;
+      outline-offset: 3px;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      form {
+        padding: 1.5rem;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Incidencias – Cierre de Actas</h1>
+  </header>
+
+  <p class="intro">
+    Este formulario sirve para reportar incidencias relacionadas con las asignaturas de cada curso. Si tienes dudas o necesitas concertar una reunión, por favor, escríbeme un correo a 
+    <a href="mailto:del.gii@ceeina.unizar.es" class="email-link">del.gii@ceeina.unizar.es</a>.
+  </p>
+
+  <form id="formulario" action="https://formspree.io/f/xldnbyaq" method="POST">
+    <label for="nombre">Nombre del delegado/a:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Ej. Marta López" required />
+
+    <label for="correo">Correo institucional:</label>
+    <input type="email" id="correo" name="correo" placeholder="nombre@unizar.es" required />
+
+    <label for="curso">Curso:</label>
+    <select id="curso" name="curso" onchange="mostrarAsignaturas()" required>
+      <option value="">-- Selecciona --</option>
+      <option value="1">1º Curso (S2)</option>
+      <option value="2">2º Curso (S2)</option>
+      <option value="3">3º Curso (S2)</option>
+      <option value="4">4º Curso (S2)</option>
+    </select>
+
+    <div id="contenedorAsignaturas"></div>
+
+    <div class="otros-block">
+      <strong>Otros (obligatorio si no hay incidencias en asignaturas):</strong>
+      <textarea id="otros" name="otros" placeholder="Describe cualquier otra incidencia general, o usa este campo si no hay incidencias por asignatura."></textarea>
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const asignaturas = {
+      "1": [
+        "Arquitectura y organización de computadores 1",
+        "Física y electrónica",
+        "Estadística",
+        "Matemática discreta",
+        "Programación II"
+      ],
+      "2": [
+        "Arquitectura y organización de computadores 2",
+        "Administración de sistemas",
+        "Interacción persona ordenador",
+        "Tecnología de programación",
+        "Bases de datos"
+      ],
+      "3": [
+        "Proyecto Software",
+        "Algoritmia básica",
+        "Procesadores de lenguajes",
+        "Aprendizaje automático",
+        "Procesadores comerciales",
+        "Sistemas empotrados I",
+        "Multiprocesadores",
+        "Ingeniería de requisitos",
+        "Verificación y validación",
+        "Arquitectura software",
+        "Bases de datos 2",
+        "Sistemas de información 2",
+        "Tecnologías de la información en la empresa",
+        "Administración de sistemas 2",
+        "Prácticas externas"
+      ],
+      "4": [
+        "Walking as a cognitive and creative process",
+        "Técnica, ecología y biodiversidad",
+        "Taller de diseño: Introducción a la ingeniería de diseño",
+        "Herramientas de sostenibilidad ambiental para implementar la agenda 2030",
+        "Laboratorio de sistemas empotrados",
+        "Garantía y seguridad",
+        "Laboratorio de ingeniería del software",
+        "Sistemas y tecnologías web",
+        "Diseño centrado en el usuario. Diseño para la multimedia",
+        "Metodologías ágiles y calidad",
+        "Bioinformática",
+        "Robótica",
+        "Videojuegos",
+        "Visión por computador",
+        "Comercio electrónico",
+        "Sistemas de información distribuidos",
+        "Prácticas externas"
+      ]
+    };
+
+    function mostrarAsignaturas() {
+      const curso = document.getElementById("curso").value;
+      const contenedor = document.getElementById("contenedorAsignaturas");
+      contenedor.innerHTML = "";
+
+      if (!curso) return;
+
+      asignaturas[curso].forEach((asignatura, i) => {
+        const div = document.createElement("div");
+        div.className = "asignatura";
+        div.innerHTML = `
+          <strong>${asignatura}</strong>
+          <textarea name="incidencia_${i}" placeholder="Describe la incidencia si existe"></textarea>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+      const incidenciasTextareas = this.querySelectorAll('textarea[name^="incidencia_"]');
+      const otros = this.querySelector('textarea[name="otros"]').value.trim();
+
+      let algunaIncidencia = false;
+      incidenciasTextareas.forEach(t => {
+        if(t.value.trim() !== "") algunaIncidencia = true;
+      });
+
+      if (!algunaIncidencia && otros === "") {
+        alert('Debes introducir alguna incidencia o completar el campo "Otros".');
+        event.preventDefault(); // evita que se envíe el formulario
+      }
+    });
+  </script>
+
+</body>
+</html>
